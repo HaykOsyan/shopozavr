@@ -1,0 +1,26 @@
+.wallpaper-main {
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 10px;
+    // height: 80%;
+    background: skyblue;
+
+    .wallpaper-img {
+        height: 80%;
+
+        img {
+            max-height: 100%;
+        }
+    }
+
+    .wallpaper-bottom {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 5px;
+    }
+}
+
+.home-leftbar {
+    margin-top: 10px;
+}

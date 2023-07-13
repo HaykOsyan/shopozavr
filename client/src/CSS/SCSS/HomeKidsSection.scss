@@ -1,0 +1,12 @@
+.kids-section{
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+    .div-kids{
+        background-size: cover;
+        width: 50%;
+        height: 300px;
+        margin: 2px 5px;
+        border-radius: 5px;
+    }
+}

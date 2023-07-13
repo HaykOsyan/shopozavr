@@ -1,0 +1,45 @@
+.tab-card {
+    padding: 5px;
+
+    .tab-cart-header {
+        justify-content: center;
+
+        .tab-cart-tags {
+            background: lightblue;
+            border-radius: 5px;
+            margin: 1px 10px;
+            color: aliceblue;
+        }
+    }
+
+    .card-content {
+        .card-footer {
+            .add-to-cart-button {
+                visibility: hidden;
+            }
+        }
+    }
+
+    .card-image-container {
+        position: relative;
+        padding: 1px;
+        margin: 2px 5px;
+
+        .card-image {
+            /* Add your desired styles for the image */
+            width: 100%;
+            height: auto;
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            /* Add your desired styles for the heart icon */
+        }
+    }
+
+    &:hover .card-footer .add-to-cart-button {
+        visibility: unset;
+    }
+}

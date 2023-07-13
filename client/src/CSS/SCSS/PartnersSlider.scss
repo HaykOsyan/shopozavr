@@ -1,0 +1,21 @@
+.partners-slider {
+    position: relative;
+    .partners-slide-container {
+        margin-top: 20px;
+        .partners-slide {
+            width: 20%;
+            height: 100px;
+
+            img {
+                max-width: 100%;
+                object-fit: contain;
+                height: 100%;
+            }
+        }
+    }
+    .partners-slider-arrows{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+}

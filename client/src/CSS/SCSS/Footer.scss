@@ -1,0 +1,27 @@
+.layout__content{
+    background: skyblue;
+    .footer-wrap{
+        .footer-bottom{
+            .footer__area-logo{
+                .footer__logo{
+                    img{
+                        width: 100px;
+                    }
+                }
+            }
+        }
+        .footer-top{
+            ul{
+                li{
+                    list-style-type: none;
+                }
+            }
+            display: flex;
+            justify-content: space-around;
+            .footer__area-menu{
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+}
