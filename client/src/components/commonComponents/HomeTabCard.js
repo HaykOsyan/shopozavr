@@ -4,7 +4,6 @@ import { FaHeart } from 'react-icons/fa';
 import '../../CSS/SCSS/HomeTabCard.scss';
 
 const HomeTabCard = ({ product }) => {
-    console.log(product)
     return (
         <>
             <div className="tab-card w-25" key={product.id}>

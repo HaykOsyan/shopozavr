@@ -13,7 +13,7 @@ const Test = () => {
             discount: -11,
             image: './static/photos/donald-duck.png',
         }
-    ])
+    ]);
 
     const partners = [
         {

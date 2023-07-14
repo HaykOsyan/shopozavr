@@ -1,0 +1,33 @@
+.product-main {
+    display: flex;
+    justify-content: space-around;
+    .product-view {
+            width: 50%;
+            .product-tags {
+            display: flex;
+
+            .product-tag {
+                background: lightblue;
+                border-radius: 5px;
+                margin: 1px 10px;
+                color: aliceblue;
+            }
+        }
+
+        .product-image {
+            // width: 50%;
+
+            .product-img {
+                width: 100%;
+            }
+        }
+    }
+    .product-information{
+        .product-properties{
+            .product-properties-content{
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+    }
+}
