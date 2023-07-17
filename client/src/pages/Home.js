@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
 import HomeWallpaper from '../components/commonComponents/HomeWallpaper';
-import HomeLeftBar from '../components/commonComponents/HomeLeftBar';
 import Slider from '../components/Slider';
-import HomeTabCard from '../components/commonComponents/HomeTabCard';
 import HomeKidsSection from '../components/commonComponents/HomeKidsSection';
 import HomeDelivery from '../components/commonComponents/HomeDelivery';
 import PartnersSlider from '../components/PartnersSlider';
 import HomeAboutUs from '../components/commonComponents/HomeAboutUs';
-import Footer from '../components/Footer';
-import FollowUs from '../components/commonComponents/FollowUs';
-import HomePopular from '../components/commonComponents/HomePopular';
+import HomeTab from '../components/commonComponents/HomeTab';
 
 const Home = () => {
 
@@ -19,18 +14,6 @@ const Home = () => {
         header: 'best quality',
         text: 'text about clothes and mend',
     }
-    const elms = [
-        <p>sfdfsdfsdfsf</p>,
-        <p>sfdfsdfsdfsf</p>,
-        <p>tttttttttttt</p>,
-        <p>eee</p>,
-        <p>wwewerwerwerrw</p>,
-        <p>xcvcxv</p>,
-        <p>vvvvvvvvvvvvvvv</p>,
-        <p>wwwwwwwwwwwww</p>,
-        <p>sfdfsdfsdfsf</p>,
-        <p>45654654654</p>,
-    ]
 
     const categories = [
         {
@@ -70,23 +53,6 @@ const Home = () => {
             img: './static/photos/jeans.jpg'
         },
     ]
-
-    const leftBarCategories = [
-        'Для девочек',
-        'Для мальчиков',
-        'Для новорожденных',
-        'Канцелярия',
-        'Аксессуары',
-        'Спорт',
-        'Настольные игры',
-        'Коляски',
-        'Развитие',
-        'Конструкторы',
-        'Хиты',
-        'Новинки',
-        'Акции',
-        'Популярное'
-    ];
 
     const [products, setProducts] = useState([
         {
@@ -172,29 +138,15 @@ const Home = () => {
     })
 
     return (
-        <Container fluid>
-            <Row>
-                <Col xs={3} md={3}>
-                    <HomeLeftBar categories={leftBarCategories} />
-                    <FollowUs/>
-                    <HomePopular/>
-                </Col>
-                <Col xs={9} md={9}>
-                    <HomeWallpaper wallPaper={wallPaper} />
-                    <Slider elements={elims} />
-                    <div className='d-flex'>
-                        {products.map((product, index) => (
-                            <HomeTabCard key={index} product={product} />
-                        ))}
-                    </div>
-                    <HomeKidsSection/>
-                    <HomeDelivery/>
-                    <PartnersSlider elements={sliderElements}/>
-                    <HomeAboutUs/>
-                </Col>
-            </Row>
-            <Footer/>
-        </Container>
+        <div className='home-page-main'>
+            <HomeWallpaper wallPaper={wallPaper} />
+            <Slider elements={elims} />
+            <HomeTab products={products} />
+            <HomeKidsSection />
+            <HomeDelivery />
+            <PartnersSlider elements={sliderElements} />
+            <HomeAboutUs />
+        </div>
     );
 };
 
