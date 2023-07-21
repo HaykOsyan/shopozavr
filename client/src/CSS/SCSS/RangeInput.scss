@@ -1,0 +1,25 @@
+.sorting-and-filters{
+    .sorting-filter-header{
+        display: flex;
+        justify-content: space-between;
+    }
+    .sorting-filter-items{
+        display: flex;
+    }
+}
+
+
+.range-inputs {
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .range-inputs input[type="range"] {
+    width: 100%;
+  }
+
+  .range-inputs .values {
+    display: flex;
+    justify-content: space-between;
+  }

@@ -16,6 +16,7 @@
                 border-radius: 5px;
                 margin: 1px 10px;
                 color: aliceblue;
+                padding: 1px 20px;
             }
         }
 
@@ -33,7 +34,7 @@
                 .product-slider-image {
                     width: 24%;
                     border: 2px solid lightgray;
-                    margin: 2px 3px;
+                    margin: 2px 2px;
                     height: 120px;
                     object-fit: cover;
                 }
@@ -54,6 +55,13 @@
 
         .product-buy {
             .btn-icon {
+                color: grey;
+                margin: 0 3px;
+            }
+            .favourite{
+                color: gold;
+            }
+            .not-favourite{
                 color: grey;
             }
         }

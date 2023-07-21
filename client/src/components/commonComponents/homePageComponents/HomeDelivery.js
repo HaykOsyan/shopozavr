@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaCoins, FaMapMarked, FaTractor } from 'react-icons/fa';
-import '../../CSS/SCSS/HomeDelivery.scss';
+import '../../../CSS/SCSS/HomeDelivery.scss';
 
 const HomeDelivery = () => {
     return (

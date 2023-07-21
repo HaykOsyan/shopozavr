@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import '../../CSS/SCSS/HomeWallpaper.scss';
+import '../../../CSS/SCSS/HomeWallpaper.scss';
 
 const HomeWallpaper = ({ wallPaper }) => {
     return (

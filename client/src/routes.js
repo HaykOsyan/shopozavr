@@ -1,10 +1,11 @@
-import Admin from "./pages/Admin"
-import Auth from "./pages/Auth"
+import Admin from "./pages/Admin";
+import Auth from "./pages/Auth";
 import Basket from "./pages/Basket"
-import Home from "./pages/Home"
-import ProductPage from "./pages/ProductPage"
-import Test from "./pages/Test"
-import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, HOME_ROUTE, PRODUCT_ROUTE, TEST_ROUTE, BASKET_ROUTE } from "./utils/consts"
+import Home from "./pages/Home";
+import ProductPage from "./pages/ProductPage";
+import Test from "./pages/Test";
+import Catalog from "./pages/Catalog";
+import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, HOME_ROUTE, PRODUCT_ROUTE, TEST_ROUTE, BASKET_ROUTE, CATALOG_ROUTE } from "./utils/consts"
 
 export const authRoutes = [
     {
@@ -42,5 +43,13 @@ export const publicRoutes = [
     {
         path: PRODUCT_ROUTE + '/:id',
         Component: ProductPage
+    },
+    {
+        path: CATALOG_ROUTE,
+        Component: Catalog
+    },
+    {
+        path: CATALOG_ROUTE + '/:id',
+        Component: Catalog
     }
 ]

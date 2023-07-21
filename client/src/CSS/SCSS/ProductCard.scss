@@ -1,0 +1,50 @@
+.product-card {
+    width: 25%;
+    padding: 1px 2px;
+    // .card-title{
+    // }
+    .card-body {
+        position: relative;
+        padding: 0;
+
+        .card-image {
+            width: 100%;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .make-favourite {
+            position: absolute;
+            right: 25px;
+            border: none;
+            background: none;
+        }
+        .favourite {
+            color: gold; /* Set the color to gold for the favourite state */
+          }
+          
+          .not-favourite {
+            color: grey; /* Set the color to grey for the non-favourite state */
+          }
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        border: none;
+
+        .card-information {
+            p {
+                margin: 0;
+            }
+        }
+
+        .btn-add-to-cart {
+            border: none;
+            background: #0d6efd;
+            color: white;
+            padding: 11px 15px;
+            border-radius: 50%;
+        }
+    }
+}

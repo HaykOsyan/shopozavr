@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import '../CSS/SCSS/ProductPage.scss';
+import '../CSS/SCSS/pages/ProductPage.scss';
 import { Button } from 'react-bootstrap';
 import { FaCartPlus, FaHeart } from 'react-icons/fa';
 
@@ -37,6 +37,12 @@ const ProductPage = () => {
     const [showFullDescription, setShowFullDescription] = useState(false);
 
     const descriptionToShow = showFullDescription ? product.description : product.description.split('\n')[0];
+
+    const [favourite, setFavourite] = useState(false);
+
+    const handleMakeFavourite = () => {
+        setFavourite(!favourite); // Toggle the favourite state on button click
+    };
 
     const handleShowMore = () => {
         setShowFullDescription(true);
@@ -89,7 +95,11 @@ const ProductPage = () => {
                             <FaCartPlus />
                             Add to Cart
                         </Button>
-                        <Button variant='outline-light' className='btn-icon'>
+                        <Button 
+                        variant='outline-light' 
+                        className={`btn-icon ${favourite ? 'favourite' : 'not-favourite'}`}
+                        onClick={handleMakeFavourite}
+                        >
                             <FaHeart />
                         </Button>
                         <a href='#' className='link-buy-one-click'>

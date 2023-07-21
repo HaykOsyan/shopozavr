@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FaHeart } from 'react-icons/fa';
-import '../../CSS/SCSS/HomeTabCard.scss';
+import '../../../CSS/SCSS/HomeTabCard.scss';
 
 const HomeTabCard = ({ product }) => {
     return (

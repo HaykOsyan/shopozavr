@@ -1,0 +1,29 @@
+.catalog-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.catalog-main {
+    .sorting-and-filters {
+        .sorting-filter-items {
+            display: flex;
+            flex-wrap: wrap;
+
+            .sorting-filter-item {
+                width: 23%;
+                height: 50px;
+                border-bottom: 2px solid black;
+                margin: 0 9px;
+
+                .select-component {
+                    width: 50%;
+                    margin: 10px 5px;
+                    border: none;
+                    -webkit-appearance: none;
+                    appearance: none;
+                }
+            }
+        }
+
+    }
+}

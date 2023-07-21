@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import HomeTabCard from '../components/commonComponents/HomeTabCard';
 import PartnersSlider from '../components/PartnersSlider';
 
 const Test = () => {

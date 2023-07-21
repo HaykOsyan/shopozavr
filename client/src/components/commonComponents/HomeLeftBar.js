@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HomeLeftBar = ({ categories }) => {
     return (
@@ -6,13 +7,13 @@ const HomeLeftBar = ({ categories }) => {
             <ul className='list-group'>
                 {categories.map((category, index) => {
                     return (
-                        <button
+                        <Link to={`/catalog/${category.id}`}
                             // href='#'
                             className="list-group-item list-group-item-action"
                             key={index}
                         >
-                            {category}
-                        </button>
+                            {category.name}
+                        </Link>
                     )
                 })}
             </ul>

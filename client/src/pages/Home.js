@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import HomeWallpaper from '../components/commonComponents/HomeWallpaper';
+import HomeWallpaper from '../components/commonComponents/homePageComponents/HomeWallpaper';
 import Slider from '../components/Slider';
-import HomeKidsSection from '../components/commonComponents/HomeKidsSection';
-import HomeDelivery from '../components/commonComponents/HomeDelivery';
+import HomeKidsSection from '../components/commonComponents/homePageComponents/HomeKidsSection';
+import HomeDelivery from '../components/commonComponents/homePageComponents/HomeDelivery';
 import PartnersSlider from '../components/PartnersSlider';
-import HomeAboutUs from '../components/commonComponents/HomeAboutUs';
-import HomeTab from '../components/commonComponents/HomeTab';
+import HomeAboutUs from '../components/commonComponents/homePageComponents/HomeAboutUs';
+import HomeTab from '../components/commonComponents/homePageComponents/HomeTab';
 
 const Home = () => {
 

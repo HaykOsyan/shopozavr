@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../CSS/SCSS/HomeKidsSection.scss';
+import '../../../CSS/SCSS/HomeKidsSection.scss';
 
 const HomeKidsSection = () => {
     return (

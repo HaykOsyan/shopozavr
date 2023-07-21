@@ -16,22 +16,22 @@ const AppRouter = observer(() => {
     const { user } = useContext(Context);
 
     const leftBarCategories = [
-        'Для девочек',
-        'Для мальчиков',
-        'Для новорожденных',
-        'Канцелярия',
-        'Аксессуары',
-        'Спорт',
-        'Настольные игры',
-        'Коляски',
-        'Развитие',
-        'Конструкторы',
-        'Хиты',
-        'Новинки',
-        'Акции',
-        'Популярное'
-    ];
-
+        { id: 1, name: 'For Girls' },
+        { id: 2, name: 'For Boys' },
+        { id: 3, name: 'For Newborns' },
+        { id: 4, name: 'Stationery' },
+        { id: 5, name: 'Accessories' },
+        { id: 6, name: 'Sports' },
+        { id: 7, name: 'Board Games' },
+        { id: 8, name: 'Strollers' },
+        { id: 9, name: 'Developmental' },
+        { id: 10, name: 'Constructors' },
+        { id: 11, name: 'Hits' },
+        { id: 12, name: 'New Arrivals' },
+        { id: 13, name: 'Sales' },
+        { id: 14, name: 'Popular' },
+      ];
+      
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
