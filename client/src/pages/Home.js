@@ -19,7 +19,7 @@ const Home = () => {
     const categories = [
         {
           id: 1,
-          name: 'muj',
+          name: 'Girls',
           img: './static/photos/photo_clothes.jpg'
         },
         {

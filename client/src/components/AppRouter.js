@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { authRoutes, publicRoutes } from '../routes';
 import Home from '../pages/Home';
@@ -11,27 +11,24 @@ import { Col, Container, Row } from 'react-bootstrap';
 import HomeLeftBar from '../components/commonComponents/HomeLeftBar';
 import FollowUs from '../components/commonComponents/FollowUs';
 import HomePopular from '../components/commonComponents/HomePopular';
+import { fetchCategories } from '../http/productAPI';
 
 const AppRouter = observer(() => {
     const { user } = useContext(Context);
+    const [categories, setCategories] = useState([]);
 
-    const leftBarCategories = [
-        { id: 1, name: 'For Girls' },
-        { id: 2, name: 'For Boys' },
-        { id: 3, name: 'For Newborns' },
-        { id: 4, name: 'Stationery' },
-        { id: 5, name: 'Accessories' },
-        { id: 6, name: 'Sports' },
-        { id: 7, name: 'Board Games' },
-        { id: 8, name: 'Strollers' },
-        { id: 9, name: 'Developmental' },
-        { id: 10, name: 'Constructors' },
-        { id: 11, name: 'Hits' },
-        { id: 12, name: 'New Arrivals' },
-        { id: 13, name: 'Sales' },
-        { id: 14, name: 'Popular' },
-      ];
-      
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const result = await fetchCategories();
+                setCategories(result);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+        fetchData();
+    }, []);
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -51,7 +48,7 @@ const AppRouter = observer(() => {
             <Container fluid>
                 <Row>
                     <Col xs={3} md={3}>
-                        <HomeLeftBar categories={leftBarCategories} />
+                        <HomeLeftBar categories={categories} />
                         <FollowUs />
                         <HomePopular />
                     </Col>
