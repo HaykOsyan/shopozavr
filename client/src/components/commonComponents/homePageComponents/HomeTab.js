@@ -3,8 +3,8 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import HomeTabCard from './HomeTabCard';
 
-const HomeTab = ({ products }) => {
-    const [key, setKey] = useState('home');
+const HomeTab = ({ hits, news, sells }) => {
+    const [key, setKey] = useState('hits');
 
     return (
         <Tabs
@@ -16,8 +16,8 @@ const HomeTab = ({ products }) => {
             <Tab eventKey="hits" title="Hits">
                 {/* Tab content for Hits */}
                 <div className='d-flex'>
-                    {products.map((product, index) => (
-                        <HomeTabCard key={index} product={product} />
+                    {hits.map((hit, index) => (
+                        <HomeTabCard key={index} product={hit} />
                     ))}
                 </div>
             </Tab>

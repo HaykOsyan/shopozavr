@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Navbar, Container, Nav, Button, InputGroup, Form } from 'react-bootstrap';
-import { ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, CART_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from '../utils/consts';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '..';
 import CatalogModal from './modalComponents/CatalogModal';
@@ -47,8 +47,9 @@ const NavBar = () => {
       img: './static/photos/jeans.jpg'
     },
   ]
+  let userId = 5   //This must become user.id
 
-  const { user } = useContext(Context)
+  const { user } = useContext(Context);
   const history = useNavigate();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -109,7 +110,7 @@ const NavBar = () => {
                 <Button className='btn-nav-icons' variant='outline-dark'>
                   <FaHeart />
                 </Button>
-                <Button className='btn-nav-icons' variant='outline-dark'>
+                <Button className='btn-nav-icons' variant='outline-dark' onClick={() => history(CART_ROUTE+'/'+userId)}>
                   <FaCartPlus />
                 </Button>
                 <span>0$</span>

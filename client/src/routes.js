@@ -5,7 +5,20 @@ import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import Test from "./pages/Test";
 import Catalog from "./pages/Catalog";
-import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, HOME_ROUTE, PRODUCT_ROUTE, TEST_ROUTE, BASKET_ROUTE, CATALOG_ROUTE } from "./utils/consts"
+import {
+    ADMIN_ROUTE,
+    LOGIN_ROUTE,
+    REGISTRATION_ROUTE,
+    HOME_ROUTE,
+    PRODUCT_ROUTE,
+    TEST_ROUTE,
+    BASKET_ROUTE,
+    CATALOG_ROUTE,
+    CART_ROUTE,
+    NEWORDER_ROUTE
+} from "./utils/consts"
+import Cart from "./pages/Cart";
+import NewOrder from "./pages/NewOrder";
 
 export const authRoutes = [
     {
@@ -27,6 +40,10 @@ export const publicRoutes = [
     {
         path: BASKET_ROUTE + '/:id',
         Component: Basket
+    },
+    {
+        path: CART_ROUTE + '/:id',
+        Component: Cart
     },
     {
         path: TEST_ROUTE,
@@ -51,5 +68,9 @@ export const publicRoutes = [
     {
         path: CATALOG_ROUTE + '/:id',
         Component: Catalog
+    },
+    {
+        path: NEWORDER_ROUTE,
+        Component:NewOrder
     }
 ]

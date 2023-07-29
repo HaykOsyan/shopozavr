@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import '../../../CSS/SCSS/HomeWallpaper.scss';
 
 const HomeWallpaper = ({ wallPaper }) => {
@@ -14,7 +15,9 @@ const HomeWallpaper = ({ wallPaper }) => {
                     <p>{wallPaper.text}</p>
                 </div>
                 <div className='w-25'>
-                    <Button variant='primary'>All Goods</Button>
+                    <Link to={'/catalog'}>
+                        <Button variant='primary'>All Goods</Button>
+                    </Link>
                 </div>
             </div>
         </div>
