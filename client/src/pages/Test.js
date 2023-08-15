@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PartnersSlider from '../components/PartnersSlider';
+import { Context } from '..';
+import { toJS } from 'mobx';
 
 const Test = () => {
 
@@ -44,6 +46,9 @@ const Test = () => {
             image: './static/logos/logo2.png'
         },
     ]
+
+    const user = useContext(Context);
+        console.log(toJS(user.user))
 
     const sliderElements = partners.map((partner, index) => {
         return (

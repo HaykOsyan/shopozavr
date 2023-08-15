@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { authRoutes, publicRoutes } from '../routes';
+import { adminRoutes, authRoutes, publicRoutes } from '../routes';
 import Home from '../pages/Home';
 import { Context } from '../index';
 import NavBar from './NavBar';
@@ -55,6 +55,9 @@ const AppRouter = observer(() => {
                     <Col xs={9} md={9}>
                         <Routes>
                             <Route path='/' element={<h1>ENTERING PAGE</h1>} />
+                            {user.isAdmin && adminRoutes.map(({ path, Component }) =>
+                                <Route key={path} path={path} element={<Component />} exact />
+                            )}
                             {user.isAuth && authRoutes.map(({ path, Component }) =>
                                 <Route key={path} path={path} element={<Component />} exact />
                             )}

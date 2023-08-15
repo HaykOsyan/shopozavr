@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navbar, Container, Nav, Button, InputGroup, Form } from 'react-bootstrap';
 import { ADMIN_ROUTE, CART_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from '../utils/consts';
 import { useNavigate } from 'react-router-dom';
@@ -6,8 +6,13 @@ import { Context } from '..';
 import CatalogModal from './modalComponents/CatalogModal';
 import { FaSearch, FaHeart, FaUser, FaCartPlus } from 'react-icons/fa';
 import '../CSS/SCSS/NavBar.scss';
+import { toJS } from 'mobx';
+import jwtDecode from 'jwt-decode';
+import { fetchOneCart } from '../http/productAPI';
 
 const NavBar = () => {
+  const [cartProductsCount, setCartProductsCount] = useState(0);
+  const [total, setTotal] = useState(0);
 
   const categories = [
     {
@@ -47,7 +52,26 @@ const NavBar = () => {
       img: './static/photos/jeans.jpg'
     },
   ]
-  let userId = 5   //This must become user.id
+
+  const calculateQuantity = (products) => {
+    return products.reduce((quantity, product) => quantity + product.quantity, 0);
+  };
+  const calculateTotal = (products) => {
+    return products.reduce((sum, product) => sum + product.sum, 0);
+};
+
+  useEffect(() => {
+    const decodedToken = jwtDecode(localStorage.getItem('token'));
+    const cartId = decodedToken.cartId;
+    fetchOneCart(cartId)
+      .then(response => {
+        setCartProductsCount(calculateQuantity(response));
+        setTotal(calculateTotal(response));
+      })
+      .catch(error => {
+        console.error('Error fetching cart:', error);
+      });
+  })
 
   const { user } = useContext(Context);
   const history = useNavigate();
@@ -58,8 +82,11 @@ const NavBar = () => {
     localStorage.setItem('token', '')
     user.setUser({})
     user.setIsAuth(false)
+    user.setIsAdmin(false)
     history(HOME_ROUTE)
   }
+  // console.log(user.isAdmin)
+  console.log(user.isAuth)
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -67,7 +94,8 @@ const NavBar = () => {
           <Navbar.Brand href="/home">SHOPOZAVR</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            {user.isAuth ?
+            <Button className='btn-modal-catalog' variant='primary' onClick={handleShow}>Catalog</Button>
+            {user.isAdmin ?
               <Nav className="me-auto">
                 {/* <NavLink to={CART_ROUTE}>Cart</NavLink> */}
                 <Button
@@ -93,7 +121,6 @@ const NavBar = () => {
               </Nav>
               :
               <Nav className="main-nav me-auto">
-                <Button className='btn-modal-catalog' variant='primary' onClick={handleShow}>Catalog</Button>
                 <InputGroup>
                   <Form.Control
                     placeholder="Search"
@@ -104,17 +131,64 @@ const NavBar = () => {
                     <FaSearch />
                   </Button>
                 </InputGroup>
-                <Button className='btn-nav-icons' variant='outline-dark'>
-                  <FaUser />
-                </Button>
-                <Button className='btn-nav-icons' variant='outline-dark'>
-                  <FaHeart />
-                </Button>
-                <Button className='btn-nav-icons' variant='outline-dark' onClick={() => history(CART_ROUTE+'/'+userId)}>
-                  <FaCartPlus />
-                </Button>
-                <span>0$</span>
-                <Button className='btn-nav-login' onClick={() => history(LOGIN_ROUTE)} variant={"outline-danger"}>Login</Button>
+                {/* {user.isAuth && (
+                  <>
+                    <Button className='btn-nav-icons' variant='outline-dark'>
+                      <FaUser />
+                    </Button>
+                    <Button className='btn-nav-icons' variant='outline-dark'>
+                      <FaHeart />
+                    </Button>
+                    <Button
+                      className='btn-nav-icons'
+                      variant='outline-dark'
+                      onClick={() => history(CART_ROUTE + '/' + userId)}
+                    >
+                      <FaCartPlus />
+                    </Button>
+                    <span>0$</span>
+                  </>
+                )} */}
+
+                {user.isAuth ? (
+                  // Show the elements when user is authenticated (isAuth is true)
+                  <>
+                    <Button className='btn-nav-icons' variant='outline-dark'>
+                      <FaUser />
+                    </Button>
+                    <Button className='btn-nav-icons' variant='outline-dark'>
+                      <FaHeart />
+                    </Button>
+                    <Button
+                      id='btnCart'
+                      className='btn-nav-icons'
+                      variant='outline-dark'
+                      onClick={() => history(CART_ROUTE + '/' + toJS(user.user.id))}
+                    >
+                      <FaCartPlus />
+                      <span className='span-cart-product-count'>{cartProductsCount}</span>
+                    </Button>
+
+                    <span>{total} $</span>
+                    <Button
+                      variant={"outline-dark"}
+                      onClick={() => logOut()}
+                    >
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  // Show the "Login" button when user is not authenticated (isAuth is false)
+                  <Button
+                    className='btn-nav-login'
+                    onClick={() => history(LOGIN_ROUTE)}
+                    variant={"outline-danger"}
+                  >
+                    Login
+                  </Button>
+                )}
+
+                {/* <Button className='btn-nav-login' onClick={() => history(LOGIN_ROUTE)} variant={"outline-danger"}>Login</Button> */}
               </Nav>
             }
           </Navbar.Collapse>

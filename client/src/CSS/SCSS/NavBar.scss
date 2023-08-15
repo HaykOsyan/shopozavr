@@ -1,21 +1,42 @@
 #navbarScroll {
     .main-nav {
-        .input-group{
+        .input-group {
             margin: 0 128px;
             width: 500px;
         }
+
         .btn-modal-catalog {
             color: red;
             margin-right: 10px;
         }
-        .btn-nav-icons{
+
+        #btnCart {
+            position: relative;
+
+            .span-cart-product-count {
+                position: absolute;
+                padding: 0;
+                color: white;
+                font-weight: 700;
+                top: 0;
+                right: 0;
+                width: 20px;
+                height: 20px;
+                background-color: blue;
+                border-radius: 50%;
+            }
+        }
+
+        .btn-nav-icons {
             margin-right: 10px;
             border: none;
         }
-        span{
+
+        span {
             padding-top: 7px;
         }
-        .btn-nav-login{
+
+        .btn-nav-login {
             margin-left: 5px;
         }
     }

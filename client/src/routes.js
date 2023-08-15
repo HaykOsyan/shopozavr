@@ -1,4 +1,4 @@
-import Admin from "./pages/Admin";
+import Admin from "./pages/admin/Admin";
 import Auth from "./pages/Auth";
 import Basket from "./pages/Basket"
 import Home from "./pages/Home";
@@ -16,20 +16,28 @@ import {
     CATALOG_ROUTE,
     CART_ROUTE,
     NEWORDER_ROUTE
-} from "./utils/consts"
+} from "./utils/consts";
 import Cart from "./pages/Cart";
 import NewOrder from "./pages/NewOrder";
 
 export const authRoutes = [
+    
     {
-        path: ADMIN_ROUTE,
-        Component: Admin
-    },
+        path: TEST_ROUTE,
+        Component:Test
+    }
     // {
     //     path: ADMIN_ROUTE +'/adding_page',
     //     Component: AddingPage
     // }
 
+]
+
+export const adminRoutes = [
+    {
+        path: ADMIN_ROUTE,
+        Component: Admin
+    },
 ]
 
 export const publicRoutes = [
@@ -45,10 +53,10 @@ export const publicRoutes = [
         path: CART_ROUTE + '/:id',
         Component: Cart
     },
-    {
-        path: TEST_ROUTE,
-        Component: Test
-    },
+    // {
+    //     path: TEST_ROUTE,
+    //     Component: Test
+    // },
     {
         path: LOGIN_ROUTE,
         Component: Auth
