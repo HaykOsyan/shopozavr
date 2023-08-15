@@ -1,12 +1,12 @@
 const ApiError = require('../error/ApiError')
 const bcrypt = require('bcrypt')
-const { User } = require('../models/models')
+const { User, Cart } = require('../models/models')
 const jwt = require('jsonwebtoken')
 const { body, validationResult } = require('express-validator');
 
-const generateJwt = (id, email, role) => {
+const generateJwt = (id, email, role, cartId) => {
     return jwt.sign(
-        { id, email, role },
+        { id, email, role, cartId },
         process.env.SECRET_KEY,
         { expiresIn: '24h' }
     )
@@ -29,23 +29,30 @@ class UserController {
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({ email, role, password: hashedPassword });
-        const token = generateJwt(user.id, user.email, user.role);
+        const cart = await Cart.create({userId:user.id});
+        const token = generateJwt(user.id, user.email, user.role, cart.id);
         return res.json(token);
     }
 
     async login(req, res, next) {
-        const { email, password } = req.body
-        const user = await User.findOne({ where: { email } })
+        const { email, password } = req.body;
+        const user = await User.findOne({ where: { email } });
+    
         if (!user) {
-            next(ApiError.internal('no user with such email hey You'))
+            return next(ApiError.internal('No user with such email'));
         }
-        let comparePassword = bcrypt.compareSync(password, user.password)
+    
+        const comparePassword = bcrypt.compareSync(password, user.password);
         if (!comparePassword) {
-            next(ApiError.internal('wrong e pass'))
+            return next(ApiError.internal('Wrong email or password'));
         }
-        const token = generateJwt(user.id, user.email, user.role)
-        return res.json(token)
+    
+        const cart = await Cart.findOne({ where: { userId: user.id } });
+        console.log(cart.id)
+        const token = generateJwt(user.id, user.email, user.role, cart ? cart.id : null);
+        return res.json(token);
     }
+    
 
     async check(req, res) {
         const token = generateJwt(req.user.id, req.user.email, req.user.role)

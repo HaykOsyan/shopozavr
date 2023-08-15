@@ -25,7 +25,12 @@ const Product =sequelize.define('product',{
     rate: {type: DataTypes.INTEGER, defaultValue:0},
     quantity: {type: DataTypes.INTEGER, defaultValue:0},
     img: {type: DataTypes.STRING},
-    code: {type: DataTypes.STRING, unique: true}
+    code: {type: DataTypes.STRING, unique: true},
+    tagNew: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true},
+    tagHot: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
+    tagDiscount: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
+    tagTop: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false},
+    tagPopular: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true},
 })
 
 const ProductInfo = sequelize.define('product_info', {
@@ -86,8 +91,8 @@ const ProductColor = sequelize.define('product_color', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
-Client.hasOne(Cart)
-Cart.belongsTo(Client)
+User.hasOne(Cart)
+Cart.belongsTo(User)
 
 Client.hasMany(Rating)
 Rating.belongsTo(Client)

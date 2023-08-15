@@ -94,53 +94,48 @@ class CartProductController {
   async create(req, res, next) {
     let updatedRows;
     try {
-      const { cartId, productIds, quantities, prices } = req.body;
+      const { cartId, productId, quantity, price } = req.body;
       const cart = await Cart.findOne({ where: { id: cartId } });
       let product;
-      for (let i = 0; i < productIds.length; i++) {
-        const productId = productIds[i];
-        const quantity = quantities[i];
-        const price = prices[i];
-        // getting product from product Table
-        product = await Product.findOne({ where: { id: productId } });
-        console.log(product.quantity - quantity)
-        //checking if there is much product
-        if (product.quantity - quantity >= 0) {
-          const choosedProduct = await CartProduct.findOne({
-            where: { cartId: cartId, productId: productId },
-          });
+      // getting product from product Table
+      product = await Product.findOne({ where: { id: productId } });
+      console.log(product.quantity - quantity)
+      //checking if there is much product
+      if (product.quantity - quantity >= 0) {
+        const choosedProduct = await CartProduct.findOne({
+          where: { cartId: cartId, productId: productId },
+        });
 
-          // check if there is such product in cart
-          if (choosedProduct) {
-            const addedProduct = await CartProduct.update(
-              // { quantity: choosedProduct.quantity + quantity },
-              { quantity: parseInt(choosedProduct.quantity) + parseInt(quantity) },
+        // check if there is such product in cart
+        if (choosedProduct) {
+          const addedProduct = await CartProduct.update(
+            // { quantity: choosedProduct.quantity + quantity },
+            { quantity: parseInt(choosedProduct.quantity) + parseInt(quantity) },
 
-              { where: { cartId: cartId, productId: productId } },
-            );
-          } else {
-            const cartProduct = await CartProduct.create({
-              cartId,
-              productId,
-              quantity,
-              price
-            });
-          }
-          // setting quantity of product new value in product Table
-          const updatedProduct = await Product.update(
-            { quantity: product.quantity - quantity },
-            { where: { id: productId } }
+            { where: { cartId: cartId, productId: productId } },
           );
-          // updated qanak
-          if (updatedProduct[0] > 0) {
-            updatedRows = await Product.findByPk(productId);
-          } else {
-            // Handle the case when the update operation did not affect any rows
-            console.log("No rows were updated");
-          }
         } else {
-          return next(ApiError.badRequest("Not enough products in stock"));
+          const cartProduct = await CartProduct.create({
+            cartId,
+            productId,
+            quantity,
+            price
+          });
         }
+        // setting quantity of product new value in product Table
+        const updatedProduct = await Product.update(
+          { quantity: product.quantity - quantity },
+          { where: { id: productId } }
+        );
+        // updated qanak
+        if (updatedProduct[0] > 0) {
+          updatedRows = await Product.findByPk(productId);
+        } else {
+          // Handle the case when the update operation did not affect any rows
+          console.log("No rows were updated");
+        }
+      } else {
+        return next(ApiError.badRequest("Not enough products in stock"));
       }
       // sending to frontend quantity of mnacac (updated) products
       return res.json(updatedRows.quantity);
@@ -149,6 +144,36 @@ class CartProductController {
       return next(ApiError.internal("Something went wrong"));
     }
   }
+
+  async update(req, res, next) {
+    try {
+      const cartProductId = req.params.id; // Assuming you'll pass the cartProductId as a parameter
+      const { quantity } = req.body;
+
+      const cartProduct = await CartProduct.findByPk(cartProductId);
+      if (!cartProduct) {
+        return next(ApiError.internal("Cart product not found"));
+      }
+
+      const originalQuantity = cartProduct.quantity; // Store the original quantity for updating the product's quantity
+
+      const updatedCartProduct = await cartProduct.update({
+        quantity: quantity,
+      });
+
+      // Update the product's quantity back in the Product table (reverse the effect)
+      const product = await Product.findByPk(cartProduct.productId);
+      await product.update({
+        quantity: product.quantity + (originalQuantity - quantity),
+      });
+
+      return res.json(updatedCartProduct);
+    } catch (err) {
+      console.log(err);
+      return next(ApiError.internal("Something went wrong"));
+    }
+  }
+  
 
 }
 

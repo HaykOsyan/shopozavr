@@ -11,6 +11,7 @@ const cartProductRouter = require('./cartProductRouter')
 const orderRouter = require('./orderRouter')
 const orderProductRouter = require('./orderProductRouter')
 const colorRouter = require('./colorRouter')
+const adminRouter = require('./adminRouter')
 
 router.use('/user', userRouter)
 router.use('/client', clientRouter)
@@ -22,5 +23,6 @@ router.use('/cart_product', cartProductRouter)
 router.use('/order', orderRouter)
 router.use('/order_product', orderProductRouter)
 router.use('/color', colorRouter)
+router.use('/admin', adminRouter)
 
 module.exports = router;

@@ -56,7 +56,8 @@ class CartController {
 // գուցե ավելի ճիշտ լինի միայն productId փոխանցել UPGRADE
     const sendingData = cart.cart_products.map((cp) => {
       return {
-        id:cp.product.id,     //UPGRADE not ProductId for my table component
+        id:cp.id,
+        productId:cp.product.id,     //UPGRADE not ProductId for my table component
         productName:cp.product.name,
         quantity:cp.quantity,
         productVolume: cp.product.volume,
@@ -64,7 +65,7 @@ class CartController {
         productCountry: cp.product.country,
         productPrice: cp.price,
         productRate: cp.product.rate,
-        // productImg: "2fbd2590-4ab3-49bd-b92d-d37657662295.png",  հետո նկարի հարցը UPGRADE
+        productImg: cp.product.img,  //հետո նկարի հարցը UPGRADE
         productCode: cp.product.code,
         category:cp.product.category.name,
         brand:cp.product.brand.name,
