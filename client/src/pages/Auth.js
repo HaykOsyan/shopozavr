@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Form, Container, FormControl, Button, Row, NavLink } from 'react-bootstrap'
 import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, TEST_ROUTE } from '../utils/consts';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -18,6 +18,9 @@ const Auth = observer(() => {
         try {
             let data;
             if (isLogin) {
+                if(email && password){
+                    console.log('zaza')
+                }
                 data = await login(email, password);
             } else {
                 data = await registration(email, password);
@@ -36,6 +39,19 @@ const Auth = observer(() => {
         }
 
     }
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key === 'Enter') {
+                click();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress);
+        };
+    }, );
 
     return (
         <Container className='d-flex justify-content-center mt-3'>

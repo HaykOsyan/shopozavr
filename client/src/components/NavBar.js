@@ -8,7 +8,7 @@ import { FaSearch, FaHeart, FaUser, FaCartPlus } from 'react-icons/fa';
 import '../CSS/SCSS/NavBar.scss';
 import { toJS } from 'mobx';
 import jwtDecode from 'jwt-decode';
-import { fetchOneCart } from '../http/productAPI';
+import { fetchCartProductsByCartId } from '../http/productAPI';
 
 const NavBar = () => {
   const [cartProductsCount, setCartProductsCount] = useState(0);
@@ -60,19 +60,32 @@ const NavBar = () => {
     return products.reduce((sum, product) => sum + product.sum, 0);
 };
 
+  // useEffect(() => {
+  //   const decodedToken = jwtDecode(localStorage.getItem('token'));
+  //   const cartId = decodedToken.cartId;
+  //   fetchOneCart(cartId)
+  //     .then(response => {
+  //       setCartProductsCount(calculateQuantity(response));
+  //       setTotal(calculateTotal(response));
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching cart:', error);
+  //     });
+  // })
   useEffect(() => {
     const decodedToken = jwtDecode(localStorage.getItem('token'));
     const cartId = decodedToken.cartId;
-    fetchOneCart(cartId)
+    fetchCartProductsByCartId(cartId)
       .then(response => {
         setCartProductsCount(calculateQuantity(response));
         setTotal(calculateTotal(response));
+        console.log(response)
       })
       .catch(error => {
         console.error('Error fetching cart:', error);
       });
-  })
-
+  },[total])
+console.log(cartProductsCount);
   const { user } = useContext(Context);
   const history = useNavigate();
   const [show, setShow] = useState(false);

@@ -21,7 +21,6 @@ const CartPageItem = ({ product }) => {
         handleChangeQuantity(product.id, quantity - 1);
     }
 
-    console.log($authHost)
     return (
         <div className='cart-page-item'>
             <div className='cart-item-image'>

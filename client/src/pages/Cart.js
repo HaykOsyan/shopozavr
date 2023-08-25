@@ -38,7 +38,8 @@ const Cart = () => {
         } else {
             console.log('not auth')
         }
-    }, [cartProducts]);
+    }, []);
+// }, [cartProducts]);
 
     return (
         <div className='cart-main'>

@@ -106,3 +106,35 @@ export const updateCartProduct = async (id,quantity) => {
     return data
 }
 
+ export const checkProductExistsInCart = async (cartId, productId) => {
+    const {data} = await $authHost.get('api/cart_product/carts/'+cartId+'/products/'+productId+'/quantity')
+    return data
+ }
+
+ export const fetchCartProductsByCartId = async (cartId) => {
+    const {data} = await $authHost.get('api/cart_product/cart/'+cartId)
+    return data
+ }
+
+export const addFavorite = async (userId, productId) => {
+    const {data} = await $authHost.post('api/favorite/add',{userId,productId})
+    return data
+}
+
+export const removeFavorite = async (userId, productId) => {
+    console.log(userId)
+    console.log(productId)
+    const { data } = await $authHost.delete('api/favorite/remove', {
+        data: { userId, productId }
+    });    return data
+}
+
+export const fetchFavorites = async (userId) => {
+    const {data} = await $authHost.get('api/favorite/user'+userId)
+    return data
+}
+
+export const isFavorite = async (userId, productId) => {
+    const {data} = await $authHost.get('api/favorite/'+userId+'/'+productId+'/isfavorite')
+    return data
+}

@@ -61,12 +61,6 @@ class CartProductController {
           {
             model: Cart,
             attributes: ["id"],
-            include: [
-              {
-                model: Client,
-                attributes: ["name"]
-              }
-            ]
           }
         ]
       });
@@ -79,7 +73,7 @@ class CartProductController {
           updatedAt: cartProduct.updatedAt,
           cartId: cartProduct.cartId,
           productName: cartProduct.product.name,
-          clientName: cartProduct.cart.client.name
+          // clientName: cartProduct.cart.client.name
         }
       });
 
@@ -89,6 +83,7 @@ class CartProductController {
       return next(ApiError.internal("Something went wrong"));
     }
   }
+
 
 
   async create(req, res, next) {
@@ -156,24 +151,44 @@ class CartProductController {
       }
 
       const originalQuantity = cartProduct.quantity; // Store the original quantity for updating the product's quantity
-
-      const updatedCartProduct = await cartProduct.update({
-        quantity: quantity,
-      });
-
+      if (quantity <= 0) {
+        await cartProduct.destroy();
+      } else {
+        const updatedCartProduct = await cartProduct.update({
+          quantity: quantity,
+        });
+      }
       // Update the product's quantity back in the Product table (reverse the effect)
       const product = await Product.findByPk(cartProduct.productId);
       await product.update({
-        quantity: product.quantity + (originalQuantity - quantity),
+        quantity: product.quantity - (quantity-originalQuantity),
       });
-
-      return res.json(updatedCartProduct);
+      return res.json('Cart product Quantity has been updated')  //UPGRADE
     } catch (err) {
       console.log(err);
       return next(ApiError.internal("Something went wrong"));
     }
   }
-  
+//checks if there is such roduct in cart returns it's quantity
+  async checkProductExistsInCart(req, res, next) {
+    const { cartId, productId } = req.params;
+
+    try {
+      const cartProduct = await CartProduct.findOne({
+        where: {
+          cartId: cartId,
+          productId: productId
+        }
+      });
+
+      // const productExistsInCart = !!cartProduct;
+
+      return res.json(cartProduct);
+    } catch (err) {
+      console.log(err);
+      return next(ApiError.internal("Something went wrong"));
+    }
+  }
 
 }
 
